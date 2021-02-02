@@ -1,0 +1,20 @@
+.info-bit {
+  display: flex;
+  flex-direction: column;
+  padding: 10px;
+  &__name {
+    font-weight: 700;
+    font-size: 15px;
+    color: rgba(0, 0, 0, 0.7);
+  }
+  &__value {
+    margin-top: 5px;
+    display: flex;
+    align-items: center;
+  }
+  &__coin {
+    margin-left: 5px;
+    height: 15px;
+    width: 15px;
+  }
+}

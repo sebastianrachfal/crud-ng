@@ -1,0 +1,139 @@
+<h1 mat-dialog-title>Customize your campaign</h1>
+<div mat-dialog-content class="campaign-form__container">
+  <mat-form-field appearance="outline">
+    <mat-label>Campaign name</mat-label>
+    <input matInput [formControl]="nameControl" />
+    <mat-error *ngIf="nameControl.hasError('required')">
+      Campaign name is required
+    </mat-error>
+    <mat-error *ngIf="nameControl.hasError('maxlength')">
+      Name must be shorter than 50 characters
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Status</mat-label>
+    <mat-select [formControl]="statusControl">
+      <mat-option *ngFor="let status of ['On', 'Off']" [value]="status">
+        {{ status }}
+      </mat-option>
+    </mat-select>
+    <mat-error>Status is required</mat-error>
+  </mat-form-field>
+
+  <mat-form-field appearance="outline">
+    <mat-label>Bid amount</mat-label>
+    <input
+      type="number"
+      matInput
+      placeholder="1234"
+      [formControl]="bidControl"
+      [errorStateMatcher]="bidMatcher"
+    />
+    <span matSuffix class="campaign-form-field__coin-suffix"
+      ><img class="campaign-form-field__coin" src="assets/svg/coin.svg" alt=""
+    /></span>
+    <mat-error *ngIf="!bidControl.hasError('min')"
+      >Min. bid must be lower than balance</mat-error
+    >
+    <mat-error *ngIf="bidControl.hasError('min')">
+      Bid must be larger or equal to 0
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Campaign fund</mat-label>
+    <input
+      type="number"
+      matInput
+      placeholder="1234"
+      [formControl]="fundControl"
+      [errorStateMatcher]="fundMatcher"
+    />
+    <span matSuffix class="campaign-form-field__coin-suffix"
+      ><img class="campaign-form-field__coin" src="assets/svg/coin.svg" alt=""
+    /></span>
+    <mat-error *ngIf="!fundControl.hasError('min')"
+      >Fund must be lower than balance</mat-error
+    >
+    <mat-error *ngIf="fundControl.hasError('min')">
+      Fund must be larger or equal to 0
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Town</mat-label>
+    <mat-select [formControl]="townControl">
+      <mat-option *ngFor="let town of predefinedTowns" [value]="town">
+        {{ town }}
+      </mat-option>
+    </mat-select>
+    <mat-error>Town is required</mat-error>
+  </mat-form-field>
+  <mat-form-field appearance="outline">
+    <mat-label>Radius</mat-label>
+    <input
+      type="number"
+      matInput
+      placeholder="1234"
+      [formControl]="radiusControl"
+    />
+    <mat-error
+      *ngIf="!radiusControl.hasError('min') && !radiusControl.hasError('max')"
+      >Radius field is required</mat-error
+    >
+    <mat-error *ngIf="radiusControl.hasError('min')">
+      Radius must be larger or equal to 0
+    </mat-error>
+    <mat-error *ngIf="radiusControl.hasError('max')">
+      Radius must be equal or smaller than 500000
+    </mat-error>
+  </mat-form-field>
+  <mat-form-field
+    class="campaign-form__row-full"
+    [ngClass]="keywordError ? 'campaign-error' : ''"
+    appearance="outline"
+  >
+    <mat-label>Keywords</mat-label>
+    <mat-chip-list #chipList>
+      <mat-chip
+        *ngFor="let keyword of keywords"
+        [selectable]="selectable"
+        [removable]="removable"
+        (removed)="remove(keyword)"
+      >
+        {{ keyword }}
+        <span matChipRemove *ngIf="removable"
+          ><img
+            class="campaign-form-field__img"
+            src="assets/svg/close.svg"
+            alt=""
+        /></span>
+      </mat-chip>
+      <input
+        class="campaign-form-field__keyword"
+        placeholder="New keyword..."
+        #keywordInput
+        matInput
+        [formControl]="keywordControl"
+        [matAutocomplete]="auto"
+        [matChipInputFor]="chipList"
+        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+        (matChipInputTokenEnd)="add($event)"
+      />
+      <mat-error *ngIf="keywordError">Specify keywords</mat-error>
+    </mat-chip-list>
+    <mat-autocomplete
+      #auto="matAutocomplete"
+      (optionSelected)="selected($event)"
+    >
+      <mat-option
+        *ngFor="let keyword of filteredKeywords | async"
+        [value]="keyword"
+      >
+        {{ keyword }}
+      </mat-option>
+    </mat-autocomplete>
+  </mat-form-field>
+</div>
+<div class="campaign-form__actions" mat-dialog-actions>
+  <button mat-button (click)="onSubmitClick()" cdkFocusInitial>Submit</button>
+  <button mat-button (click)="onNoClick()">Cancel</button>
+</div>

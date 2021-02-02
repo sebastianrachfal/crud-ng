@@ -1,0 +1,40 @@
+.campaign-form {
+  &__container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  &-field {
+    &__keyword {
+      padding: 9px 0;
+    }
+    &__img {
+      height: 18px;
+      width: 18px;
+    }
+    &__coin {
+      height: 18px;
+      &-suffix {
+        position: relative;
+        width: 15px;
+        height: 8px;
+        display: block;
+      }
+    }
+  }
+  &__actions {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+  }
+  &__row {
+    &-full {
+      width: 100%;
+    }
+  }
+}
+
+mat-form-field {
+  width: 48%;
+  margin-bottom: 15px;
+}

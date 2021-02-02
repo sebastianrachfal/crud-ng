@@ -1,0 +1,72 @@
+.container {
+  margin: 0 auto;
+}
+
+.item-list {
+  display: flex;
+  flex-direction: column;
+  margin-top: 30px;
+  &__create-new {
+    align-self: flex-end;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
+  &__chip {
+    margin-right: 10px;
+  }
+}
+.info-bits {
+  display: flex;
+  width: 100%;
+  & > app-info-bit {
+    flex: 1;
+  }
+}
+.toolbar {
+  &-spacer {
+    flex: 1 0 auto;
+  }
+  &-balance {
+    display: flex;
+    align-items: center;
+    &__coin {
+      margin-left: 5px;
+      height: 25px;
+      width: 25px;
+    }
+  }
+}
+.mat {
+  &-expansion-panel {
+    &-header {
+      &-title {
+        display: flex;
+        align-items: center;
+        font-size: large;
+      }
+      &-description {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        padding: 5px 0;
+        margin-right: 0;
+        & > span {
+          font-weight: bolder;
+          margin-right: 20px;
+        }
+      }
+    }
+    &-description {
+      &-button {
+        &-row {
+          display: flex;
+          flex-wrap: nowrap;
+          align-self: flex-end;
+          & > button {
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+  }
+}

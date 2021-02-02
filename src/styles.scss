@@ -1,1 +1,30 @@
 /* You can add global styles to this file, and also import other style files */
+
+html,
+body {
+  height: 100%;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+  width: 100vw;
+}
+.mat-input-element {
+  background-color: white !important;
+}
+.campaign-error {
+  color: white;
+  & .mat-form-field-outline {
+    color: #f44336 !important;
+    &-start,
+    &-gap,
+    &-end {
+      border-width: 2px !important;
+    }
+  }
+  & mat-label {
+    color: #f44336 !important;
+  }
+}
+
+@import "./media_queries.scss";
